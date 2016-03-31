@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.io.FileUtils;
 import org.jrimum.texgit.FlatFile;
@@ -60,11 +62,26 @@ public class ArquivoRetorno {
 		return cabecalho;
 	}
 
-	public List<TransacaoTitulo> getTitulos() {
+	public List<TransacaoTitulo> getTransacoes() {
 		return transacoes;
 	}
 
 	public Sumario getSumario() {
 		return sumario;
+	}
+
+	public Map<Integer, Collection<TransacaoTitulo>> getTransacoesPorCodigoDeOcorrencia() {
+		Map<Integer, Collection<TransacaoTitulo>> transacoesPorOcorrencias = new TreeMap<Integer, Collection<TransacaoTitulo>>();
+
+		for (TransacaoTitulo transacao : getTransacoes()) {
+			if (!transacoesPorOcorrencias.containsKey(transacao.getCodigoDeOcorrencia())) {
+				ArrayList<TransacaoTitulo> transacoes = new ArrayList<TransacaoTitulo>();
+				transacoes.add(transacao);
+				transacoesPorOcorrencias.put(transacao.getCodigoDeOcorrencia(), transacoes);
+			} else {
+				transacoesPorOcorrencias.get(transacao.getCodigoDeOcorrencia()).add(transacao);
+			}
+		}
+		return transacoesPorOcorrencias;
 	}
 }
