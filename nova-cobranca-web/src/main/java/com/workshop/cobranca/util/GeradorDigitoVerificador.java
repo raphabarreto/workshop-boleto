@@ -5,22 +5,22 @@ import java.io.Serializable;
 public class GeradorDigitoVerificador implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public String gerarDigito(Integer carteira, String nossoNumero) {
 		String digitosParaCalculo = String.valueOf(carteira);
 		digitosParaCalculo += nossoNumero;
-		
+
 		int soma = obterSomaParaModulo11(digitosParaCalculo);
-		
+
 		return obterDigitoVerificador(soma);
 	}
 
 	private String obterDigitoVerificador(int soma) {
 		int modulo = 11;
 		int restoDivisao = soma % modulo;
-		
+
 		int preDigito = modulo - restoDivisao;
-		
+
 		String digitoVerificador;
 		switch (preDigito) {
 		case 10:
@@ -33,7 +33,7 @@ public class GeradorDigitoVerificador implements Serializable {
 			digitoVerificador = String.valueOf(preDigito);
 			break;
 		}
-		
+
 		return digitoVerificador;
 	}
 
@@ -48,7 +48,7 @@ public class GeradorDigitoVerificador implements Serializable {
 				fator = 2;
 			}
 		}
-		
+
 		return somatorio;
 	}
 
@@ -57,10 +57,7 @@ public class GeradorDigitoVerificador implements Serializable {
 		for (int i = 0; i < (11 - numero.length()); i++) {
 			novoNumero += "0";
 		}
-		
+
 		return novoNumero + numero;
 	}
-
-	
-	
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 
 import org.jrimum.texgit.Record;
 
-public class TransacoesTitulo {
+public class TransacaoTitulo {
 
 	private Record registro;
 
@@ -13,7 +13,7 @@ public class TransacoesTitulo {
 		DESPREZADO, ACEITO, DESCONHECIDO
 	}
 
-	public TransacoesTitulo(Record registro) {
+	public TransacaoTitulo(Record registro) {
 		if (registro != null) {
 			this.registro = registro;
 		} else {
